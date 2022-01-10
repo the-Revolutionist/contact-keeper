@@ -174,24 +174,29 @@ img {
 
 /* Grid */
 .grid-2 {
+
+  display: -ms-grid;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 2rem;
 }
 
 .grid-3 {
+  display: -ms-grid;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 1rem;
 }
 
 .grid-4 {
+  display: -ms-grid;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 2rem;
 }
 
 .grid-2-3 {
+  display: -ms-grid;
   display: grid;
   grid-template-columns: 2fr 3fr;
   grid-gap: 2rem;
