@@ -1,5 +1,4 @@
 import ContactContext from "../../context/contact/contactContext";
-import { ContactForm } from "./ContactForm";
 import { ContactItem } from "./ContactItem";
 import { useContext } from "react";
 
@@ -8,7 +7,6 @@ export const Contacts = () => {
   const { contacts } = contactContext;
   return (
     <>
-      <ContactForm />
       {contacts.map((contact) => (
         <ContactItem key={contact.id} contact={contact} />
       ))}

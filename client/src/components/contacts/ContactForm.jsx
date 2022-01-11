@@ -1,6 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+
+import ContactContext from "../../context/contact/contactContext";
 
 export const ContactForm = () => {
+  const contactContext = useContext(ContactContext);
+
   const [contact, setContact] = useState({
     name: "",
     email: "",
@@ -15,9 +19,18 @@ export const ContactForm = () => {
       [e.target.name]: e.target.value,
     });
   };
-
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    contactContext.addContact(contact);
+    setContact({
+      name: "",
+      email: "",
+      phone: "",
+      type: "personal",
+    });
+  };
   return (
-    <form action="">
+    <form onSubmit={handleOnSubmit}>
       <h2 className="text-primary">Add Contact</h2>
       <input
         type="text"
@@ -35,8 +48,8 @@ export const ContactForm = () => {
       />
       <input
         type="text"
-        placeholder="phone"
-        name="Phone"
+        placeholder="Phone"
+        name="phone"
         value={phone}
         onChange={handleOnChange}
       />
@@ -45,7 +58,7 @@ export const ContactForm = () => {
         type="radio"
         name="type"
         value="personal"
-        checked
+        checked={type === "personal"}
         onChange={handleOnChange}
       />{" "}
       Personal{" "}
@@ -54,6 +67,7 @@ export const ContactForm = () => {
         name="type"
         id=""
         value="professional"
+        checked={type === "professional"}
         onChange={handleOnChange}
       />{" "}
       Professional{" "}
