@@ -42,12 +42,12 @@ export const contactReducer = (state, action) => {
     case SET_CURRENT:
       return {
         ...state,
-        contacts: [...state.contacts, action.payload],
+        current: action.payload,
       };
     case CLEAR_CURRENT:
       return {
         ...state,
-        contacts: [...state.contacts, action.payload],
+        current: null,
       };
     case SET_ALERT:
       return {
