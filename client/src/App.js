@@ -12,21 +12,13 @@ const App = () => {
   return (
     <ContactState>
       <Router>
-        <div>
-          <NavBar />
-          <div className="container">
-            <Switch>
-              <Route exact path="/">
-                <Home />
-              </Route>
-              <Route exact path="/about">
-                <About />
-              </Route>
-              <Route path="/">
-                <NotFound />
-              </Route>
-            </Switch>
-          </div>
+        <NavBar />
+        <div className="container">
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/about" component={About} />
+            <Route path="/" component={NotFound} />
+          </Switch>
         </div>
       </Router>
     </ContactState>

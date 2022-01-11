@@ -26,14 +26,14 @@ export const ContactState = (props) => {
         type: "personal",
       },
       {
-        id: 1,
+        id: 2,
         name: "Sara Watson",
         email: "Sara@email.com",
         phone: "111-111-1111",
-        type: "personal",
+        type: "professional",
       },
       {
-        id: 1,
+        id: 3,
         name: "Harry White",
         email: "harry@email.com",
         phone: "111-111-1111",
