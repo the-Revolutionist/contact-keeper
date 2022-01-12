@@ -63,9 +63,11 @@ export const ContactState = (props) => {
     dispatch({ type: CLEAR_CURRENT });
   };
   //* update contact
-  const updateContact = () => {};
+  const updateContact = (contact) => {
+    dispatch({ type: UPDATE_CONTACTS, payload: contact });
+  };
   //* filter contacts
-  const filterContacts = () => {};
+  const filterContacts = (params, contacts) => {};
   //* clear filter
   const clearFilter = () => {};
   return (
