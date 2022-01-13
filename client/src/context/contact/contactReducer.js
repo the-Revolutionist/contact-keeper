@@ -32,12 +32,15 @@ export const contactReducer = (state, action) => {
     case FILTER_CONTACTS:
       return {
         ...state,
-        contacts: [...state.contacts, action.payload],
+        filtered: state.contacts.filter((contact) => {
+          const regex = new RegExp(`${action.payload}`, "gi");
+          return contact.name.match(regex) || contact.email.match(regex);
+        }),
       };
     case CLEAR_FILTER:
       return {
         ...state,
-        contacts: [...state.contacts, action.payload],
+        filtered: null,
       };
     case SET_CURRENT:
       return {
