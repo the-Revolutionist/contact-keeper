@@ -8,7 +8,7 @@ import {
   REGISTER_SUCCESS,
   USER_LOADED,
 } from "../types";
-import { useContext, useEffect, useReducer } from "react";
+import { useContext, useReducer } from "react";
 
 import AuthContext from "./authContext";
 import authReducer from "./authReducer";
@@ -30,11 +30,29 @@ export const AuthState = (props) => {
   //*   LOAD USER
   const loadUser = () => {};
   //*   REGISTER USER
-  const registerUser = () => {};
+  const register = async (formData) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      const res = await axios.post("/api/users", formData, config);
+      dispatch({
+        type: REGISTER_SUCCESS,
+        payload: res.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: REGISTER_FAIL,
+        payload: error.response.data.msg,
+      });
+    }
+  };
   //*   LOGIN USER
-  const loginUser = () => {};
+  const login = () => {};
   //*   LOGOUT USER
-  const logoutUser = () => {};
+  const logout = () => {};
   //*   CLEAR ERROR
   const clearError = () => {};
 
@@ -47,9 +65,9 @@ export const AuthState = (props) => {
         error: state.error,
         user: state.user,
         loadUser,
-        registerUser,
-        loginUser,
-        logoutUser,
+        register,
+        login,
+        logout,
         clearError,
       }}
     >
