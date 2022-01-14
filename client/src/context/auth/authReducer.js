@@ -11,6 +11,26 @@ import {
 
 const authReducer = (state, action) => {
   switch (action.type) {
+    case REGISTER_SUCCESS:
+      localStorage.setItem("token", action.payload.token);
+      return {
+        ...state,
+        ...action.payload,
+        isAuthenticated: true,
+        loading: false,
+      };
+
+    case REGISTER_FAIL:
+      localStorage.removeItem("token");
+      return {
+        ...state,
+        token: null,
+        isAuthenticated: false,
+        loading: false,
+        user: null,
+        error: action.payload,
+      };
+
     case USER_LOADED:
       return {
         ...state,
@@ -18,7 +38,9 @@ const authReducer = (state, action) => {
         loading: false,
         user: action.payload,
       };
-    case REGISTER_SUCCESS:
+
+    case AUTH_ERROR:
+      break;
     case LOGIN_SUCCESS:
       return {
         ...state,
@@ -26,9 +48,10 @@ const authReducer = (state, action) => {
         isAuthenticated: true,
         loading: false,
       };
-    case REGISTER_FAIL:
-    case AUTH_ERROR:
+
     case LOGIN_FAIL:
+      break;
+
     case LOGOUT:
       return {
         ...state,
@@ -38,11 +61,13 @@ const authReducer = (state, action) => {
         user: null,
         error: action.payload,
       };
+
     case CLEAR_ERRORS:
       return {
         ...state,
         error: null,
       };
+
     default:
       throw new Error(`Unsupported type of: ${action.type}`);
   }
