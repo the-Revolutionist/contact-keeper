@@ -1,12 +1,18 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+
+import AlertContext from "../../context/alert/alertContext";
 
 export const Register = () => {
+  const alertContext = useContext(AlertContext);
+  const { setAlert } = alertContext;
+
   const [user, setUser] = useState({
     name: "",
     email: "",
     password: "",
     password2: "",
   });
+
   const { name, email, password, password2 } = user;
 
   const handleOnChange = (e) => {
@@ -15,7 +21,13 @@ export const Register = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    console.log("register");
+    if (name === "" || email === "" || password === "") {
+      setAlert("Please enter all fields", "danger");
+    } else if (password !== password2) {
+      setAlert("Passwords do not match", "danger");
+    } else {
+      console.log("register");
+    }
   };
 
   return (
@@ -34,6 +46,7 @@ export const Register = () => {
               onChange={handleOnChange}
             />
           </div>
+
           <div className="form-group">
             <label htmlFor="email">Email</label>
             <input
@@ -43,6 +56,7 @@ export const Register = () => {
               onChange={handleOnChange}
             />
           </div>
+
           <div className="form-group">
             <label htmlFor="password">Password</label>
             <input
@@ -50,8 +64,10 @@ export const Register = () => {
               name="password"
               value={password}
               onChange={handleOnChange}
+              minLength="6"
             />
           </div>
+
           <div className="form-group">
             <label htmlFor="password2">Confirm Password</label>
             <input
@@ -59,8 +75,10 @@ export const Register = () => {
               name="password2"
               value={password2}
               onChange={handleOnChange}
+              minLength="6"
             />
           </div>
+
           <input
             className="btn btn-primary btn-block"
             type="submit"

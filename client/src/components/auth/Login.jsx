@@ -30,6 +30,7 @@ export const Login = () => {
               type="email"
               name="email"
               value={email}
+              required
               onChange={handleOnChange}
             />
           </div>
@@ -40,7 +41,9 @@ export const Login = () => {
               type="password"
               name="password"
               value={password}
+              required
               onChange={handleOnChange}
+              minLength="6"
             />
           </div>
 
