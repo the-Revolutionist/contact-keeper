@@ -1,14 +1,16 @@
-import { useContext, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+
+import { useContext, useEffect, useState } from "react";
 
 import AlertContext from "../../context/alert/alertContext";
 import AuthContext from "../../context/auth/authContext";
 
-export const Register = () => {
+export const Register = (props) => {
   const alertContext = useContext(AlertContext);
   const { setAlert } = alertContext;
 
   const authContext = useContext(AuthContext);
-  const { register } = authContext;
+  const { register, error, clearErrors, isAuthenticated } = authContext;
 
   const [user, setUser] = useState({
     name: "",
@@ -16,6 +18,16 @@ export const Register = () => {
     password: "",
     password2: "",
   });
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      props.history.push("/");
+    }
+    if (error === "User already exists") {
+      setAlert(error, "danger");
+      clearErrors();
+    }
+  }, [error, isAuthenticated, props.history]);
 
   const { name, email, password, password2 } = user;
 
@@ -35,7 +47,6 @@ export const Register = () => {
         email,
         password,
       });
-      setUser({ name: null, email: null, password: null });
     }
   };
 

@@ -12,6 +12,11 @@ import { Login } from "./components/auth/Login";
 import { NavBar } from "./components/layout/NavBar";
 import { NotFound } from "./components/pages/NotFound";
 import { Register } from "./components/auth/Register";
+import setAuthToken from "./utils/setAuthToken";
+
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
 
 const App = () => {
   return (

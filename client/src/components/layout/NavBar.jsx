@@ -1,7 +1,11 @@
+import AuthContext from "../../context/auth/authContext";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 export const NavBar = ({ title, icon }) => {
+  const authContext = AuthContext;
+  const { user } = authContext;
+  console.log({ authContext });
   return (
     <>
       <div className="navbar bg-primary">
